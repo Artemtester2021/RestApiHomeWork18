@@ -1,15 +1,19 @@
 plugins {
     id 'java-library'
     id 'io.qameta.allure' version '2.11.2'
-    id "io.freefair.lombok" version "6.0.0-m2"
+    id "io.freefair.lombok" version "8.4"
 }
 
 repositories {
     mavenCentral()
 }
 
-def restAssuredVersion = "5.3.1",
-    allureVersion = "2.21.0"
+def selenideVersion = "7.7.3",
+    restAssuredVersion = "5.4.0",
+    allureVersion = "2.21.0",
+    junitVersion = "5.10.1",
+    jacksonVersion = "2.16.1",
+    aspectjweaverVersion = '1.9.20.1'
 
 allure {
     report {
@@ -27,16 +31,31 @@ allure {
 
 dependencies {
     testImplementation(
+            "com.codeborne:selenide:$selenideVersion",
+            "io.qameta.allure:allure-selenide:$allureVersion",
             "io.rest-assured:rest-assured:$restAssuredVersion",
             "io.rest-assured:json-schema-validator:$restAssuredVersion",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
-            "org.junit.jupiter:junit-jupiter:5.10.0",
-            'org.slf4j:slf4j-simple:2.0.7'
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            "org.aspectj:aspectjweaver:$aspectjweaverVersion",
+            'org.slf4j:slf4j-simple:2.0.9',
+            'org.assertj:assertj-core:3.24.2',
+            'io.github.bonigarcia:webdrivermanager:5.8.0',
+
+            "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
+            "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion",
+            "com.fasterxml.jackson.core:jackson-core:$jacksonVersion",
+            "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion"
     )
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
 tasks.withType(Test) {
     useJUnitPlatform()
+    systemProperties(System.getProperties())
 
     testLogging {
         lifecycle {
@@ -45,8 +64,6 @@ tasks.withType(Test) {
         }
     }
 }
-
-
 
 task restApi_test(type: Test) {
     useJUnitPlatform {

@@ -8,7 +8,6 @@ import helpers.WithLogin;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import pages.ModalPage;
 import pages.ProfilePage;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
@@ -18,7 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DeleteBooksDemoQA extends TestBase {
 
     ProfilePage profilePage = new ProfilePage();
-    ModalPage modalPage = new ModalPage();
     Requests requests = new Requests();
 
 

@@ -23,7 +23,7 @@ public class DeleteBooksDemoQA extends TestBase {
     @Test
     @WithLogin
     @DisplayName("Проверка содержимого в корзине, после удаления книг")
-    void CheckingTheContentsInTheTrashAfterDeletingBooks() {
+    void CheckingTheContentsInTheTrashAfterDeletingBooksTest() {
         AuthResponseDto authResponseModel = step("Авторизация через Api", () ->
                 AuthorizationApi.authorize()
         );

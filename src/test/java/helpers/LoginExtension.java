@@ -1,7 +1,7 @@
 package helpers;
 
 import api.requests.authorization.AuthResponseDto;
-import api.requests.authorization.AuthorizationApi;
+import api.requests.authorization.AccountApiRequests;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -22,7 +22,7 @@ public class LoginExtension implements BeforeEachCallback {
 
     @Step("Авторизация через Api и установка cookies")
     private void  authorizeAndSetCookies() {
-        AuthResponseDto auth = AuthorizationApi.authorize();
+        AuthResponseDto auth = AccountApiRequests.authorize();
 
         open("/favicon.ico");
 

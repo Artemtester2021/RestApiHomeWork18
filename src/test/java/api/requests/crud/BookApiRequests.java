@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.given;
 import static java.lang.String.format;
 import static api.specs.CrudResponseSpecs.*;
 
-public class Requests extends DefaultRequestSpec {
+public class BookApiRequests extends DefaultRequestSpec {
 
     public void addBookToProfile(String userId, String isbn) {
         String bookData = format("{\"userId\":\"%s\",\"collectionOfIsbns\":[{\"isbn\":\"%s\"}]}",

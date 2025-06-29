@@ -6,7 +6,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static helpers.TestData.*;
 
-public class AuthorizationApi {
+public class AccountApiRequests {
     public static AuthResponseDto authorize() {
         String authData = "{\"userName\":\"" + login + "\",\"password\":\"" + password + "\"}";
         return given()

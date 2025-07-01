@@ -2,6 +2,7 @@ package helpers;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Attachment;
+import io.qameta.allure.restassured.AllureRestAssured;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -57,5 +58,4 @@ public class Attach {
         }
         return null;
     }
-
 }

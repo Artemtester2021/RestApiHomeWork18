@@ -1,7 +1,7 @@
 package helpers;
 
 import api.requests.authorization.AuthResponseDto;
-import api.requests.authorization.AccountApiRequests;
+import api.AccountApiRequests;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;

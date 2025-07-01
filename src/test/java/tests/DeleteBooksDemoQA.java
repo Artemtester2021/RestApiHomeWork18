@@ -1,12 +1,11 @@
 package tests;
 
 import api.requests.authorization.AuthResponseDto;
-import api.requests.authorization.AccountApiRequests;
+import api.AccountApiRequests;
 import api.requests.crud.GetAccountUserBooksByIdResponseDto;
-import api.requests.crud.BookApiRequests;
+import api.BookApiRequests;
 import helpers.WithLogin;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import pages.ProfilePage;
 
@@ -14,7 +13,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Tag("restApi")
+
 public class DeleteBooksDemoQA extends TestBase {
 
     ProfilePage profilePage = new ProfilePage();

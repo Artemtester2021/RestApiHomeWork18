@@ -1,4 +1,4 @@
-package api.specs;
+package specs;
 
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.specification.ResponseSpecification;
@@ -21,4 +21,5 @@ public class CrudResponseSpecs {
             .expectStatusCode(200)
             .log(ALL)
             .build();
+
 }

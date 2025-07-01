@@ -18,15 +18,6 @@ import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
 
-    private static final AllureRestAssured FILTER = new AllureRestAssured();
-
-    @BeforeEach
-    public void customAllureListener() {
-        FILTER.setRequestTemplate("request.ftl");
-        FILTER.setResponseTemplate("response.ftl");
-        RestAssured.filters(FILTER);
-    }
-
     @BeforeAll
     static void setup() {
         Configuration.baseUrl = "https://demoqa.com";
@@ -34,7 +25,6 @@ public class TestBase {
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion", "127.0");
         Configuration.pageLoadStrategy = "eager";
-        Configuration.timeout = 10000;
         Configuration.remote = String.format("https://%s:%s@%s/wd/hub",
                 System.getProperty("selenoid_login", "user1"),
                 System.getProperty("selenoid_password", "1234"),
@@ -50,6 +40,11 @@ public class TestBase {
         Configuration.browserCapabilities = capabilities;
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+    }
+
+    @BeforeEach
+    public void setupAllureListener() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
     @AfterEach

@@ -1,21 +1,24 @@
-package api.requests.crud;
+package api;
 
-import api.specs.DefaultRequestSpec;
+import api.requests.crud.GetAccountUserBooksByIdResponseDto;
+import api.requests.models.AddBookRequest;
+import specs.DefaultRequestSpec;
+
+import java.util.Collections;
 
 import static api.endpoint.EndPoints.ACCOUNT_USER;
 import static api.endpoint.EndPoints.BOOKSTORE_BOOKS;
 import static io.restassured.RestAssured.given;
-import static java.lang.String.format;
-import static api.specs.CrudResponseSpecs.*;
+import static specs.CrudResponseSpecs.*;
 
 public class BookApiRequests extends DefaultRequestSpec {
 
     public void addBookToProfile(String userId, String isbn) {
-        String bookData = format("{\"userId\":\"%s\",\"collectionOfIsbns\":[{\"isbn\":\"%s\"}]}",
-                userId , isbn);
+        AddBookRequest request = new AddBookRequest(userId, Collections.singletonList(new AddBookRequest.Isbn(isbn)));
+
         given()
                 .spec(defaultRequestSpec())
-                .body(bookData)
+                .body(request)
                 .when()
                 .post(BOOKSTORE_BOOKS)
                 .then()
@@ -44,6 +47,5 @@ public class BookApiRequests extends DefaultRequestSpec {
                 .extract()
                 .as(GetAccountUserBooksByIdResponseDto.class);
     }
-
 }
 

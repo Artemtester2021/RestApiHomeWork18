@@ -15,6 +15,7 @@ import java.util.Map;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
+    private static boolean isRemoteRun; // Выносим переменную в поле класса
 
     @BeforeAll
     static void setup() {
@@ -23,14 +24,15 @@ public class TestBase {
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.pageLoadStrategy = "eager";
 
-        boolean isRemoteRun = System.getProperty("selenoid_host") != null;
+        String selenoidHost = System.getProperty("selenoid_host"); // Сохраняем значение в переменную
+        isRemoteRun = selenoidHost != null; // Используем сохраненное значение
 
         if (isRemoteRun) {
             // Настройки для удалённого запуска
             Configuration.remote = String.format("https://%s:%s@%s/wd/hub",
                     System.getProperty("selenoid_login"),
                     System.getProperty("selenoid_password"),
-                    System.getProperty("selenoid_host"));
+                    selenoidHost); // Используем сохраненное значение
 
             Configuration.browserVersion = System.getProperty("browserVersion", "127.0");
 
@@ -56,7 +58,7 @@ public class TestBase {
         Attach.pageSource();
         Attach.browserConsoleLogs();
 
-        if (System.getProperty("selenoid_host") != null) {
+        if (isRemoteRun) { // Используем сохраненное значение
             Attach.addVideo();
         }
 
